@@ -1,7 +1,8 @@
 const { Router } = require("express");
-// const {donationController}=require()
+const { donationController } = require("../Controllers/donationController");
 const donationRouter = new Router();
-donationRouter.get("/", (req, res) => {
-  res.json("gfgf");
-});
+donationRouter.get("/", donationController.getDonation);
+donationRouter.get("/:id", donationController.getDonationbyId);
+donationRouter.post("/", donationController.createDonation);
+donationRouter.delete("/:id", donationController.deleteDonaotion);
 module.exports = { donationRouter };
