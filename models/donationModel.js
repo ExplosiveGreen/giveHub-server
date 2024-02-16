@@ -11,4 +11,4 @@ const donationSchema = new mongoose.Schema({
   status: String,
 });
 const donationModel = mongoose.model("donations", donationSchema);
-module.exports = donationModel;
+module.exports = { donationModel, donationSchema };

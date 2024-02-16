@@ -1,4 +1,4 @@
-const { deliveryRepository } = require("../Repositories/DeliveryRepository");
+const { deliveryRepository } = require("../Repositories/deliveryRepository");
 exports.deliveryController = {
   getDelivery: async (req, res) => {
     try {
