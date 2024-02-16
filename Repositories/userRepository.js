@@ -1,4 +1,4 @@
-const { org, donator, carrier } = require("../models/userModel");
+const { userModel, org, donator, carrier } = require("../models/userModel");
 
 exports.userRepository = {
   getUser: async () => {
