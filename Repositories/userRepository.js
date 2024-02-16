@@ -1,4 +1,3 @@
-const e = require("express");
 const { org, donator, carrier } = require("../models/userModel");
 
 exports.userRepository = {
