@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { donationModel } = require("./donationModel");
 const userSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -12,7 +13,7 @@ const organizationSchema = new mongoose.Schema({
     longitude: Number,
     latitude: Number,
   },
-  donations: [mongoose.Schema.Types.ObjectId],
+  donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
   donation_requests: [mongoose.Schema.Types.ObjectId],
   deliveries: [mongoose.Schema.Types.ObjectId],
 });
