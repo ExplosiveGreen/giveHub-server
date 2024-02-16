@@ -4,7 +4,6 @@ const userSchema = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  auth: String,
 });
 
 const organizationSchema = new mongoose.Schema({
@@ -14,7 +13,10 @@ const organizationSchema = new mongoose.Schema({
     latitude: Number,
   },
   donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
-  donation_requests: [mongoose.Schema.Types.ObjectId],
+  donation_requests: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: donationModel,
+  },
   deliveries: [mongoose.Schema.Types.ObjectId],
 });
 organizationSchema.add(userSchema);

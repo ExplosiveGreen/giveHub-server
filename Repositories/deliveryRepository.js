@@ -2,7 +2,11 @@ const { deliveryModel } = require("../models/deliveryModel");
 
 exports.deliveryRepository = {
   getDelivery: async () => {
-    return await deliveryModel.find({});
+    return await deliveryModel
+      .find({})
+      .populate("donator")
+      .populate("organization")
+      .populate("donations");
   },
   getDeliverybyId: async (id) => {
     return await deliveryModel.findById(id).exec();

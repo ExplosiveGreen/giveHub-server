@@ -2,7 +2,10 @@ const { userModel, org, donator, carrier } = require("../models/userModel");
 
 exports.userRepository = {
   getUser: async () => {
-    return await userModel.find({}).populate("donations");
+    return await userModel
+      .find({})
+      .populate("donations")
+      .populate("donation_requests");
   },
   getUserbyId: async (id) => {
     return await userModel.findById(id).exec();
