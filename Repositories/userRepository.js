@@ -8,7 +8,11 @@ exports.userRepository = {
       .populate("donation_requests");
   },
   getUserbyId: async (id) => {
-    return await userModel.findById(id).exec();
+    return await userModel
+      .findById(id)
+      .populate("donations")
+      .populate("donation_requests")
+      .exec();
   },
   createUser: async (user) => {
     const auth = user.auth;

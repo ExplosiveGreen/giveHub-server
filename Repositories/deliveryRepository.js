@@ -9,7 +9,12 @@ exports.deliveryRepository = {
       .populate("donations");
   },
   getDeliverybyId: async (id) => {
-    return await deliveryModel.findById(id).exec();
+    return await deliveryModel
+      .findById(id)
+      .populate("donator")
+      .populate("organization")
+      .populate("donations")
+      .exec();
   },
   createDelivery: async (delivery) => {
     return await deliveryModel.create(delivery);
