@@ -25,7 +25,7 @@ const donatorSchema = new mongoose.Schema({
     longitude: Number,
     latitude: Number,
   },
-  donations: [mongoose.Schema.Types.ObjectId],
+  donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
   delivery_requests: [mongoose.Schema.Types.ObjectId],
 });
 donatorSchema.add(userSchema);
