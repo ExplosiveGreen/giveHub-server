@@ -2,7 +2,10 @@ const { userModel, org, donator, carrier } = require("../models/userModel");
 
 exports.userRepository = {
   getOrgs: async () => {
-    return await org.find({});
+    return await org
+      .find({})
+      .populate("donations")
+      .populate("donation_requests");
   },
   getUser: async () => {
     return await userModel
@@ -26,6 +29,15 @@ exports.userRepository = {
     } else if (auth == "carrier") {
       return await carrier.create(user);
     }
+  },
+  updateUser: async (id, body) => {
+    return await org.findByIdAndUpdate(
+      id,
+      {
+        $push: { donation_requests: body.id },
+      },
+      { new: true }
+    );
   },
   deleteUser: async (id) => {
     return await userModel.deleteOne({ _id: id });
