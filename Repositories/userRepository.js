@@ -1,6 +1,9 @@
 const { userModel, org, donator, carrier } = require("../models/userModel");
 
 exports.userRepository = {
+  getOrgs: async () => {
+    return await org.find({});
+  },
   getUser: async () => {
     return await userModel
       .find({})

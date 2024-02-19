@@ -1,5 +1,13 @@
 const { userRepository } = require("../Repositories/userRepository");
 exports.userController = {
+  getOrgs: async (req, res) => {
+    try {
+      const orgs = await userRepository.getOrgs();
+      res.status(200).json(orgs);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  },
   getUser: async (req, res) => {
     try {
       const users = await userRepository.getUser();
