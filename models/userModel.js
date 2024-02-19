@@ -12,7 +12,7 @@ const organizationSchema = new mongoose.Schema({
     longitude: Number,
     latitude: Number,
   },
-  donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
+  donations: [{ type: mongoose.Schema.Types.ObjectId, ref: donationModel }],
   donation_requests: [
     {
       type: mongoose.Schema.Types.ObjectId,
