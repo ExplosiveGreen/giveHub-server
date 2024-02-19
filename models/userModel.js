@@ -13,10 +13,12 @@ const organizationSchema = new mongoose.Schema({
     latitude: Number,
   },
   donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
-  donation_requests: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: donationModel,
-  },
+  donation_requests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: donationModel,
+    },
+  ],
   deliveries: [mongoose.Schema.Types.ObjectId],
 });
 organizationSchema.add(userSchema);
