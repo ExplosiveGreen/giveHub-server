@@ -13,4 +13,7 @@ exports.donationRepository = {
   deleteDonaotion: async (id) => {
     return await donationModel.deleteOne({ _id: id });
   },
+  updateDonation: async (id, body) => {
+    return await donationModel.findByIdAndUpdate(id, body, { new: true });
+  },
 };

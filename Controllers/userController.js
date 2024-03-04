@@ -1,16 +1,11 @@
 const { userRepository } = require("../Repositories/userRepository");
+const filter = require("../functions");
 exports.userController = {
-  getOrgs: async (req, res) => {
-    try {
-      const orgs = await userRepository.getOrgs();
-      res.status(200).json(orgs);
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
-  },
   getUser: async (req, res) => {
     try {
-      const users = await userRepository.getUser();
+      let qs = req.query;
+      let users = await userRepository.getUser();
+      users = filter(users, qs);
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -26,8 +21,12 @@ exports.userController = {
   },
   createUser: async (req, res) => {
     try {
-      const user = await userRepository.createUser(req.body);
-      res.status(201).json(user);
+      if (req.body.auth == "org")
+        res.status(400).json({ message: "You can't create an org user" });
+      else {
+        const user = await userRepository.createUser(req.body);
+        res.status(201).json(user);
+      }
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

@@ -1,8 +1,11 @@
 const { donationRepository } = require("../Repositories/donationRepository");
+const filter = require("../functions");
 exports.donationController = {
   getDonation: async (req, res) => {
     try {
-      const donations = await donationRepository.getDonation();
+      let qs = req.query;
+      let donations = await donationRepository.getDonation();
+      donations = filter(donations, qs);
       res.status(200).json(donations);
     } catch (error) {
       res.status(500).json({ message: error.message });
@@ -28,6 +31,17 @@ exports.donationController = {
     try {
       await donationRepository.deleteDonaotion(req.params.id);
       res.status(204).end();
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  },
+  updateDonation: async (req, res) => {
+    try {
+      const donation = await donationRepository.updateDonation(
+        req.params.id,
+        req.body
+      );
+      res.status(200).json(donation);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

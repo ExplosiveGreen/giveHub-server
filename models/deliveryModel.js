@@ -4,7 +4,7 @@ const { donator, org } = require("./userModel");
 const deliverySchema = new mongoose.Schema({
   donator: { type: mongoose.Schema.Types.ObjectId, ref: donator },
   organization: { type: mongoose.Schema.Types.ObjectId, ref: org },
-  delivery_date: Date,
+  delivery_date: { type: Date, default: Date.now },
   status: String,
   donations: { type: mongoose.Schema.Types.ObjectId, ref: donationModel },
 });

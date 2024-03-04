@@ -5,4 +5,5 @@ deliveryRouter.get("/", deliveryController.getDelivery);
 deliveryRouter.get("/:id", deliveryController.getDeliverybyId);
 deliveryRouter.post("/", deliveryController.createDelivery);
 deliveryRouter.delete("/:id", deliveryController.deleteDelivery);
+deliveryRouter.put("/:id", deliveryController.updateDelivery);
 module.exports = { deliveryRouter };

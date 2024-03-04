@@ -22,4 +22,7 @@ exports.deliveryRepository = {
   deleteDelivery: async (id) => {
     return await deliveryModel.deleteOne({ _id: id });
   },
+  updateDelivery: async (id, body) => {
+    return await deliveryModel.findByIdAndUpdate(id, body, { new: true });
+  },
 };
