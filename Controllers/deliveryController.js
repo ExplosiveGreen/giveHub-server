@@ -29,8 +29,8 @@ exports.deliveryController = {
   },
   deleteDelivery: async (req, res) => {
     try {
-      await deliveryRepository.deleteDelivery(req.params.id);
-      res.status(204).end();
+      const Delete = await deliveryRepository.deleteDelivery(req.params.id);
+      res.status(200).json(Delete);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }
