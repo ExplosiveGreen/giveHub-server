@@ -6,7 +6,6 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, { cors: { origin: "*" } });
 const { carrier } = require("./models/userModel");
-const { deliveryModel } = require("./models/deliveryModel");
 
 const { donationRouter } = require("./Routers/donationRouter");
 const { deliveryRouter } = require("./Routers/deliveryRouter");
@@ -22,7 +21,7 @@ app.use("/api/users", userRouter);
 
 let onlineUsers = [];
 const addNewUser = (userId, socketId) => {
-  if (!onlineUsers.find((user) => user.userId === userId))
+  if (!onlineUsers.find((user) => user.userId == userId))
     onlineUsers.push({ userId, socketId });
 };
 const removeUser = (socketId) => {
@@ -33,20 +32,19 @@ io.on("connection", (socket) => {
     const carriers = await carrier.find({
       accepted_deliveries: { $in: [delivery._id] },
     });
-    if (delivery) {
-      carriers.map((carrier) => {
-        onlineUsers.map((user) => {
-          if (user.userId == carrier._id) {
-            io.to(user.socketId).emit("notification", delivery);
-          }
-        });
+    carriers.map((carrier) => {
+      onlineUsers.map((user) => {
+        if (user.userId == carrier._id) {
+          io.to(user.socketId).emit("notification", delivery);
+        }
       });
-    }
+    });
   });
   console.log("a user connected");
   socket.on("join", (userId) => {
     addNewUser(userId, socket.id);
   });
+
   socket.on("disconnect", () => {
     removeUser(socket.id);
     console.log("user disconnected");
